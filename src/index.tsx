@@ -82,6 +82,7 @@ export interface ImageStyle extends FlexStyle, TransformsStyle, ShadowStyleIOS {
 export interface FastImageProps {
     source: Source | number
     resizeMode?: ResizeMode
+    blurRadius?: number
     fallback?: boolean
 
     onLoadStart?(): void

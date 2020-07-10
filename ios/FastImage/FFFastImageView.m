@@ -223,6 +223,18 @@
                             }
                         }
                     }];
+        if (_blurRadius && _blurRadius > 0) {
+            UIVisualEffect *blurEffect;
+            blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+
+            UIVisualEffectView *visualEffectView;
+            visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+            visualEffectView.frame = self.bounds;
+            visualEffectView.alpha = 1 - (_blurRadius / 10);
+            visualEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+
+            [self addSubview:visualEffectView];
+        }
 }
 
 @end

@@ -106,6 +106,41 @@ exports[`Renders a normal Image when not passed a uri. 1`] = `
 </View>
 `;
 
+exports[`Renders with blur. 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "overflow": "hidden",
+      },
+      Object {
+        "height": 44,
+        "width": 44,
+      },
+    ]
+  }
+>
+  <Image
+    blurRadius={5}
+    resizeMode="cover"
+    source={
+      Object {
+        "uri": "https://facebook.github.io/react/img/logo_og.png",
+      }
+    }
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
+</View>
+`;
+
 exports[`Renders with dynamic url. 1`] = `
 <View
   style={

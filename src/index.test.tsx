@@ -62,3 +62,21 @@ test('Renders with dynamic url.', () => {
 
     expect(tree).toMatchSnapshot()
 })
+
+test('Renders with blur.', () => {
+    const source: Source = {
+        uri: 'https://facebook.github.io/react/img/logo_og.png',
+    }
+    const tree = renderer
+        .create(
+            <FastImage
+                source={source}
+                style={style.image}
+                blurRadius={5}
+                fallback
+            />,
+        )
+        .toJSON()
+
+    expect(tree).toMatchSnapshot()
+})
