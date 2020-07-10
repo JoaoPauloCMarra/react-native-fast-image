@@ -19,10 +19,10 @@ Performant React Native image component.
 
 <p align="center" >
   <kbd>
-    <img src="https://github.com/DylanVann/react-native-fast-image/raw/master/docs/assets/scroll.gif" title="Scroll Demo" float="left">
+    <img src="https://github.com/JoaoPauloCMarra/react-native-fast-image/raw/master/docs/assets/scroll.gif" title="Scroll Demo" float="left">
   </kbd>
   <kbd>
-    <img src="https://github.com/DylanVann/react-native-fast-image/raw/master/docs/assets/priority.gif" title="Priority Demo" float="left">
+    <img src="https://github.com/JoaoPauloCMarra/react-native-fast-image/raw/master/docs/assets/priority.gif" title="Priority Demo" float="left">
   </kbd>
   <br>
   <em>FastImage example app.</em>
@@ -131,6 +131,13 @@ Headers to load the image with. e.g. `{ Authorization: 'someAuthToken' }`.
 -   `FastImage.cacheControl.immutable` - **(Default)** - Only updates if url changes.
 -   `FastImage.cacheControl.web` - Use headers and follow normal caching procedures.
 -   `FastImage.cacheControl.cacheOnly` - Only show images from cache, do not make any network requests.
+
+---
+
+### `source.cacheOmitURLParams?: boolean`
+
+If true will be cached under url without query params
+Useful when image url is dynamic and query params contain security information
 
 ---
 
@@ -244,17 +251,17 @@ Thanks to [@mobinni](https://github.com/mobinni) for helping with the conceptual
 -   SDWebImage - `MIT`
 -   Glide - BSD, part MIT and Apache 2.0. See the [LICENSE](https://github.com/bumptech/glide/blob/master/license) file for details.
 
-[build-badge]: https://img.shields.io/circleci/project/github/DylanVann/react-native-fast-image/master.svg?style=flat-square
-[build]: https://circleci.com/gh/DylanVann/react-native-fast-image/tree/master
-[coverage-badge]: https://img.shields.io/codecov/c/github/dylanvann/react-native-fast-image.svg?style=flat-square
-[coverage]: https://codecov.io/github/dylanvann/react-native-fast-image
+[build-badge]: https://img.shields.io/circleci/project/github/JoaoPauloCMarra/react-native-fast-image/master.svg?style=flat-square
+[build]: https://circleci.com/gh/JoaoPauloCMarra/react-native-fast-image/tree/master
+[coverage-badge]: https://img.shields.io/codecov/c/github/JoaoPauloCMarra/react-native-fast-image.svg?style=flat-square
+[coverage]: https://codecov.io/github/JoaoPauloCMarra/react-native-fast-image
 [downloads-badge]: https://img.shields.io/npm/dm/react-native-fast-image.svg?style=flat-square
 [npmtrends]: http://www.npmtrends.com/react-native-fast-image
 [package]: https://www.npmjs.com/package/react-native-fast-image
 [version-badge]: https://img.shields.io/npm/v/react-native-fast-image.svg?style=flat-square
-[twitter]: https://twitter.com/home?status=Check%20out%20react-native-fast-image%20by%20%40atomarranger%20https%3A//github.com/DylanVann/react-native-fast-image
-[twitter-badge]: https://img.shields.io/twitter/url/https/github.com/DylanVann/react-native-fast-image.svg?style=social
-[github-watch-badge]: https://img.shields.io/github/watchers/dylanvann/react-native-fast-image.svg?style=social
-[github-watch]: https://github.com/dylanvann/react-native-fast-image/watchers
-[github-star-badge]: https://img.shields.io/github/stars/dylanvann/react-native-fast-image.svg?style=social
-[github-star]: https://github.com/dylanvann/react-native-fast-image/stargazers
+[twitter]: https://twitter.com/home?status=Check%20out%20react-native-fast-image%20by%20%40atomarranger%20https%3A//github.com/JoaoPauloCMarra/react-native-fast-image
+[twitter-badge]: https://img.shields.io/twitter/url/https/github.com/JoaoPauloCMarra/react-native-fast-image.svg?style=social
+[github-watch-badge]: https://img.shields.io/github/watchers/JoaoPauloCMarra/react-native-fast-image.svg?style=social
+[github-watch]: https://github.com/JoaoPauloCMarra/react-native-fast-image/watchers
+[github-star-badge]: https://img.shields.io/github/stars/JoaoPauloCMarra/react-native-fast-image.svg?style=social
+[github-star]: https://github.com/JoaoPauloCMarra/react-native-fast-image/stargazers
