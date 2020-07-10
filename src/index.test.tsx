@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native'
 import React from 'react'
 import renderer from 'react-test-renderer'
-import FastImage from './index'
+import FastImage, { Source } from './'
 
 const style = StyleSheet.create({ image: { width: 44, height: 44 } })
 
@@ -46,6 +46,18 @@ test('Renders Image with fallback prop.', () => {
                 fallback
             />,
         )
+        .toJSON()
+
+    expect(tree).toMatchSnapshot()
+})
+
+test('Renders with dynamic url.', () => {
+    const source: Source = {
+        uri: 'https://facebook.github.io/react/img/logo_og.png',
+        cacheOmitURLParams: true,
+    }
+    const tree = renderer
+        .create(<FastImage source={source} style={style.image} fallback />)
         .toJSON()
 
     expect(tree).toMatchSnapshot()

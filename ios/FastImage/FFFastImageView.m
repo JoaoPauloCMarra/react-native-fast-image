@@ -1,5 +1,5 @@
 #import "FFFastImageView.h"
-#import <SDWebImage/UIImage+MultiFormat.h>
+#import "FFFastImageCacheNoParamMapper.h"
 
 @interface FFFastImageView()
 
@@ -125,8 +125,7 @@
             } {
                 self.hasSentOnLoadStart = NO;
             }
-            // Use SDWebImage API to support external format like WebP images
-            UIImage *image = [UIImage sd_imageWithData:[NSData dataWithContentsOfURL:_source.url]];
+            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:_source.url]];
             [self setImage:image];
             if (self.onFastImageProgress) {
                 self.onFastImageProgress(@{
@@ -144,19 +143,12 @@
         }
         
         // Set headers.
-        NSDictionary *headers = _source.headers;
-        SDWebImageDownloaderRequestModifier *requestModifier = [SDWebImageDownloaderRequestModifier requestModifierWithBlock:^NSURLRequest * _Nullable(NSURLRequest * _Nonnull request) {
-            NSMutableURLRequest *mutableRequest = [request mutableCopy];
-            for (NSString *header in headers) {
-                NSString *value = headers[header];
-                [mutableRequest setValue:value forHTTPHeaderField:header];
-            }
-            return [mutableRequest copy];
+        [_source.headers enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString* header, BOOL *stop) {
+            [[SDWebImageDownloader sharedDownloader] setValue:header forHTTPHeaderField:key];
         }];
-        SDWebImageContext *context = @{SDWebImageContextDownloadRequestModifier : requestModifier};
         
         // Set priority.
-        SDWebImageOptions options = SDWebImageRetryFailed | SDWebImageHandleCookies;
+        SDWebImageOptions options = SDWebImageRetryFailed;
         switch (_source.priority) {
             case FFFPriorityLow:
                 options |= SDWebImageLowPriority;
@@ -179,6 +171,12 @@
             case FFFCacheControlImmutable:
                 break;
         }
+		
+		if (_source.cacheOmitURLParams) {
+			[[FFFastImageCacheNoParamMapper shared] add:_source.url];
+		} else {
+			[[FFFastImageCacheNoParamMapper shared] remove:_source.url];
+		}
         
         if (self.onFastImageLoadStart) {
             self.onFastImageLoadStart(@{});
@@ -189,16 +187,15 @@
         self.hasCompleted = NO;
         self.hasErrored = NO;
         
-        [self downloadImage:_source options:options context:context];
+        [self downloadImage:_source options:options];
     }
 }
 
-- (void)downloadImage:(FFFastImageSource *) source options:(SDWebImageOptions) options context:(SDWebImageContext *)context {
+- (void)downloadImage:(FFFastImageSource *) source options:(SDWebImageOptions) options {
     __weak typeof(self) weakSelf = self; // Always use a weak reference to self in blocks
     [self sd_setImageWithURL:_source.url
             placeholderImage:nil
                      options:options
-                     context:context
                     progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
                         if (weakSelf.onFastImageProgress) {
                             weakSelf.onFastImageProgress(@{
